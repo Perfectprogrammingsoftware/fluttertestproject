@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
-
+import 'dart:developer' as devtools show log;
 
 
 
@@ -69,11 +69,12 @@ class _RegisterViewState extends State<RegisterView> {
                 
                   final email = _email.text;
                   final password = _password.text;
+                  // ignore: non_constant_identifier_names
                   final UserCredential= await FirebaseAuth.instance.signInWithEmailAndPassword(
                     email: email,
                      password: password
                      );
-                     print(UserCredential);
+                    devtools.log(UserCredential.toString());
                  },
                child: const Text('Register'),
                ),

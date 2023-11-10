@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:flutter/material.dart';
-
+import 'dart:developer' as devtools show log;
 
 
 
@@ -59,20 +59,26 @@ class _LoginViewState extends State<LoginView> {
                       ),
                     ),
               
-                 TextButton(onPressed: () async {
+                 TextButton(
+                  onPressed: () async {
                 
                   final email = _email.text;
                   final password = _password.text;
-                 try{ final userCredential= await FirebaseAuth.instance.signInWithEmailAndPassword(
+                 try{ 
+                 await FirebaseAuth.instance.signInWithEmailAndPassword(
                     email: email,
-                     password: password
+                     password: password,
                      );
-                     print(userCredential);
-                     print('Login succesfull');
-                 } catch (e) {
-                  print('something is bad');
-                  print(e);
-                  print(e.runtimeType);
+                      // ignore: use_build_context_synchronously
+                      Navigator.of(context).pushNamedAndRemoveUntil(
+                        '/notes/',
+                        (route) => false,
+                      );
+                    
+                 }on FirebaseAuthException catch (e) {
+                  devtools.log('something is bad');
+                  devtools.log(e.toString());
+                  devtools.log(e.runtimeType.toString());
                  }
                  },
                child: const Text('Login'),

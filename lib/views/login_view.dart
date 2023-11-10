@@ -1,8 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:flutter/material.dart';
-import 'dart:developer' as devtools show log;
 
+import 'package:flutter_testproject/constants/routes.dart';
+import 'package:flutter_testproject/utilities/show_error_dialog.dart';
 
 
 class LoginView extends StatefulWidget {
@@ -71,21 +72,44 @@ class _LoginViewState extends State<LoginView> {
                      );
                       // ignore: use_build_context_synchronously
                       Navigator.of(context).pushNamedAndRemoveUntil(
-                        '/notes/',
+                        notesRoute,
                         (route) => false,
                       );
                     
                  }on FirebaseAuthException catch (e) {
-                  devtools.log('something is bad');
-                  devtools.log(e.toString());
-                  devtools.log(e.runtimeType.toString());
+                  if (e.code=='user-not-found') {
+                    
+                    // ignore: use_build_context_synchronously
+                    await showErrorDialog(
+                      context,
+                       'user not found',
+                    );
+                  }else if(e.code=='wrong-password'){
+                    // ignore: use_build_context_synchronously
+                    await showErrorDialog(
+                      context,
+                       'wrong password'
+                       );
+                  }else{
+                    // ignore: use_build_context_synchronously
+                    await showErrorDialog(
+                      context, 
+                      'Error: ${e.code}',
+                      );
+                  }
+                 }catch (e){
+                  // ignore: use_build_context_synchronously
+                  await showErrorDialog(
+                    context, 
+                    e.toString(),
+                    );
                  }
                  },
                child: const Text('Login'),
                ),
                TextButton(onPressed: () {
                 Navigator.of(context).pushNamedAndRemoveUntil(
-                  '/register/',
+                  registerRoute,
                  (route) => false
                  );
                },
@@ -94,7 +118,7 @@ class _LoginViewState extends State<LoginView> {
                TextButton(
                 onPressed: () {
                   Navigator.of(context).pushNamedAndRemoveUntil(
-                    '/email/', 
+                    verifyemail, 
                     (route) => false
                     );
                 }, 
@@ -105,9 +129,4 @@ class _LoginViewState extends State<LoginView> {
    );
   }
 }
-
-
-
-
-
 

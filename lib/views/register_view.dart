@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'dart:developer' as devtools show log;
 
+import 'package:flutter_testproject/constants/routes.dart';
+
 
 
 
@@ -80,7 +82,7 @@ class _RegisterViewState extends State<RegisterView> {
                ),
                TextButton(onPressed: () {
                 Navigator.of(context).pushNamedAndRemoveUntil(
-                  '/login/',
+                  loginRoute,
                    (route) => false
                    );
                },
@@ -89,8 +91,8 @@ class _RegisterViewState extends State<RegisterView> {
                TextButton(
                 onPressed: () {
                   Navigator.of(context).pushNamedAndRemoveUntil(
-                    '/email/', 
-                    (route) => false
+                    verifyemail,
+                   (route) => false
                     );
                 }, 
                 child: const Text('Not verified email? Verify here!'), 

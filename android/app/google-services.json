@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "360007186412",
+    "project_id": "babubhaiyaa-a69f2",
+    "storage_bucket": "babubhaiyaa-a69f2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:360007186412:android:70367743f1be38cf24b2c9",
+        "android_client_info": {
+          "package_name": "com.example.flutter_testproject"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyApKeKhh0LymUj-Xg0gNiV5thfZQj4sZ4A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
